@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="stylesheet" href="Style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="wrapper">
+        <form action="../php/Register.php" method="post">
+            <h1>Daftar</h1>
+            <div class="input-box">
+                <input type="text" name="username" placeholder="Nama Pengguna Dibutuhkan" required>
+                <i class="bx bxs-user"></i>
+            </div>
+            <div class="input-box">
+                <input type="email" name="email" placeholder="Email Dibutuhkan" required>
+                <i class="bx bxs-envelope"></i>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password" id="password" placeholder="Password Dibutuhkan" required>
+                <i class="bx bx-hide toggle-password" onclick="togglePassword('password')"></i>
+            </div>
+            <div class="input-box">
+                <input type="password" name="confirm_password" id="confirm-password" placeholder="Konfirmasi Password" required>
+                <i class="bx bx-hide toggle-password" onclick="togglePassword('confirm-password')"></i>
+            </div>
+        
+            <div class="remember-forgot">
+                <label><input type="checkbox" name="terms" required> Saya Setuju dengan Syarat dan Ketentuan</label>
+            </div>
+        
+            <button type="submit" class="btn">Daftar</button>
+        
+            <div class="register-link">
+                <p>Sudah Punya Akun? <a href="#">Login Sekarang</a></p>
+            </div>
+        </form>
+        
+    </div>
+
+    <script>
+        function togglePassword(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleIcon = passwordInput.nextElementSibling;
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('bx-hide');
+                toggleIcon.classList.add('bx-show');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('bx-show');
+                toggleIcon.classList.add('bx-hide');
+            }
+            
+            // Tambahkan animasi untuk ikon
+            toggleIcon.classList.add('pulse-animation');
+            setTimeout(() => {
+                toggleIcon.classList.remove('pulse-animation');
+            }, 300);
+        }
+    </script>
+</body>
+</html>
