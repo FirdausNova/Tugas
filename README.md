@@ -1,4 +1,4 @@
-# Tugas
+# Tugas Kelompok
 
 Proyek ini adalah sebuah aplikasi berbasis web yang menyediakan berbagai fitur untuk pengguna.
 
