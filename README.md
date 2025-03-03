@@ -1,6 +1,6 @@
 # Tugas Kelompok
 
-Proyek ini adalah sebuah aplikasi berbasis web yang menyediakan berbagai fitur untuk pengguna.
+Proyek ini adalah sebuah web yang menyediakan berbagai fitur untuk pengguna.
 
 ## Fitur
 - Login & Register
