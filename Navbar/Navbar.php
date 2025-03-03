@@ -259,10 +259,10 @@ session_start();
         
         <ul class="nav-links">
             <li><a href="#" class="active">Beranda</a></li>
-            <li><a href="#">Tentang</a></li>
-            <li><a href="#">Layanan</a></li>
-            <li><a href="#">Portofolio</a></li>
-            <li><a href="#">Kontak</a></li>
+            <li><a href="Tentang.php">Tentang</a></li>
+            <li><a href="Layanan.php">Layanan</a></li>
+            <li><a href="Portofolio.php">Portofolio</a></li>
+            <li><a href="Kontak.php">Kontak</a></li>
         </ul>
         
         <div class="auth-buttons">
