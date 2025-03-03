@@ -6,6 +6,58 @@
     <title>Register Page</title>
     <link rel="stylesheet" href="Style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* Custom Alert Styling */
+        .custom-alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateX(150%);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 350px;
+        }
+        
+        .custom-alert.show {
+            transform: translateX(0);
+        }
+        
+        .custom-alert.error {
+            background-color: rgba(245, 101, 101, 0.95);
+            border-left: 4px solid #e53e3e;
+        }
+        
+        .custom-alert.success {
+            background-color: rgba(72, 187, 120, 0.95);
+            border-left: 4px solid #38a169;
+        }
+        
+        .custom-alert i {
+            font-size: 24px;
+            color: white;
+        }
+        
+        .custom-alert p {
+            color: white;
+            font-weight: 500;
+            margin: 0;
+        }
+        
+        .custom-alert .close-alert {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -38,7 +90,13 @@
                 <p>Sudah Punya Akun? <a href="../Login page/Index.html">Login Sekarang</a></p>
             </div>
         </form>
-        
+    </div>
+
+    <!-- Container untuk custom alert -->
+    <div id="customAlert" class="custom-alert">
+        <i class="bx bx-error-circle" id="alertIcon"></i>
+        <p id="alertMessage"></p>
+        <i class="bx bx-x close-alert" onclick="closeAlert()"></i>
     </div>
 
     <script>
@@ -62,6 +120,73 @@
                 toggleIcon.classList.remove('pulse-animation');
             }, 300);
         }
+
+        // Fungsi untuk menampilkan custom alert
+        function showAlert(message, type = 'error') {
+            const alertBox = document.getElementById('customAlert');
+            const alertMessage = document.getElementById('alertMessage');
+            const alertIcon = document.getElementById('alertIcon');
+            
+            alertMessage.textContent = message;
+            
+            // Reset class
+            alertBox.className = 'custom-alert';
+            
+            // Tambahkan class berdasarkan tipe
+            alertBox.classList.add(type);
+            
+            // Ganti icon berdasarkan tipe
+            if (type === 'error') {
+                alertIcon.className = 'bx bx-error-circle';
+            } else if (type === 'success') {
+                alertIcon.className = 'bx bx-check-circle';
+            }
+            
+            // Tampilkan alert
+            setTimeout(() => {
+                alertBox.classList.add('show');
+            }, 100);
+            
+            // Sembunyikan secara otomatis setelah beberapa detik
+            setTimeout(() => {
+                closeAlert();
+            }, 5000);
+        }
+        
+        // Fungsi untuk menutup custom alert
+        function closeAlert() {
+            const alertBox = document.getElementById('customAlert');
+            alertBox.classList.remove('show');
+        }
+        
+        // Cek URL parameter untuk menampilkan pesan error
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const errorType = urlParams.get('error');
+            
+            if (errorType) {
+                let errorMessage = '';
+                
+                switch(errorType) {
+                    case 'password':
+                        errorMessage = 'Password harus minimal 8 karakter, mengandung huruf besar, huruf kecil, dan angka!';
+                        break;
+                    case 'mismatch':
+                        errorMessage = 'Konfirmasi password tidak cocok!';
+                        break;
+                    case 'exists':
+                        errorMessage = 'Username atau email sudah digunakan!';
+                        break;
+                    case 'failed':
+                        errorMessage = 'Gagal membuat akun. Silahkan coba lagi!';
+                        break;
+                    default:
+                        errorMessage = 'Terjadi kesalahan. Silahkan coba lagi!';
+                }
+                
+                showAlert(errorMessage, 'error');
+            }
+        });
     </script>
 </body>
 </html>

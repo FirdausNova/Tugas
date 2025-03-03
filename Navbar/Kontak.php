@@ -436,19 +436,25 @@ session_start();
         
         <div class="auth-buttons">
             <?php
-            if(isset($_SESSION["username"])) {
-                // Jika user sudah login - redirect langsung ke dashboard saat klik user button
-                echo '<div class="user-menu">
-                    <a href="../php/Dashboard.php" class="user-button">
-                        <i class="bx bxs-user-circle"></i>
-                        <span>' . $_SESSION["username"] . '</span>
-                        <i class="bx bx-chevron-down"></i>
+          if(isset($_SESSION["username"])) {
+            // Jika user sudah login - tampilkan username dengan dropdown logout
+            echo '<div class="user-menu">
+                <div class="user-button" id="userButton">
+                    <i class="bx bxs-user-circle"></i>
+                    <span>' . $_SESSION["username"] . '</span>
+                    <i class="bx bx-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="../php/logout.php" class="dropdown-item logout">
+                        <i class="bx bx-log-out"></i>
+                        <span>Logout</span>
                     </a>
-                </div>';
-            } else {
-                // Jika user belum login - hanya menampilkan tombol Daftar
-                echo '<a href="../Login Page/Index.html" class="register-btn">Login</a>';
-            }
+                </div>
+            </div>';
+        } else {
+            // Jika user belum login - hanya menampilkan tombol Daftar
+            echo '<a href="../Login Page/Index.html" class="register-btn">Login</a>';
+        }
             ?>
         </div>
         
@@ -775,6 +781,23 @@ session_start();
         
         // Check on scroll
         window.addEventListener('scroll', checkVisible);
+
+        // User dropdown functionality
+        const userButton = document.getElementById('userButton');
+        const userDropdown = document.getElementById('userDropdown');
+
+        if (userButton) {
+            userButton.addEventListener('click', () => {
+                userDropdown.classList.toggle('show');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!userButton.contains(e.target) && !userDropdown.contains(e.target)) {
+                    userDropdown.classList.remove('show');
+                }
+            });
+        }
     </script>
 </body>
 </html>

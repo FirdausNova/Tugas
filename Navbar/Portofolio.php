@@ -397,24 +397,30 @@ session_start();
             <li><a href="Tentang.php">Tentang</a></li>
             <li><a href="Layanan.php">Layanan</a></li>
             <li><a href="#" class="active">Portofolio</a></li>
-            <li><a href="#">Kontak</a></li>
+            <li><a href="Kontak.php">Kontak</a></li>
         </ul>
         
         <div class="auth-buttons">
             <?php
-            if(isset($_SESSION["username"])) {
-                // Jika user sudah login - redirect langsung ke dashboard saat klik user button
-                echo '<div class="user-menu">
-                    <a href="../php/Dashboard.php" class="user-button">
-                        <i class="bx bxs-user-circle"></i>
-                        <span>' . $_SESSION["username"] . '</span>
-                        <i class="bx bx-chevron-down"></i>
+           if(isset($_SESSION["username"])) {
+            // Jika user sudah login - tampilkan username dengan dropdown logout
+            echo '<div class="user-menu">
+                <div class="user-button" id="userButton">
+                    <i class="bx bxs-user-circle"></i>
+                    <span>' . $_SESSION["username"] . '</span>
+                    <i class="bx bx-chevron-down"></i>
+                </div>
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="../php/logout.php" class="dropdown-item logout">
+                        <i class="bx bx-log-out"></i>
+                        <span>Logout</span>
                     </a>
-                </div>';
-            } else {
-                // Jika user belum login - hanya menampilkan tombol Daftar
-                echo '<a href="../Login Page/Index.html" class="register-btn">Login</a>';
-            }
+                </div>
+            </div>';
+        } else {
+            // Jika user belum login - hanya menampilkan tombol Daftar
+            echo '<a href="../Login Page/Index.html" class="register-btn">Login</a>';
+        }
             ?>
         </div>
         
@@ -439,39 +445,62 @@ session_start();
                 <button class="filter-btn" data-filter="web">Pengembangan Web</button>
                 <button class="filter-btn" data-filter="mobile">Aplikasi Mobile</button>
                 <button class="filter-btn" data-filter="design">Desain Grafis</button>
-                <button class="filter-btn" data-filter="branding">Branding</button>
                 <button class="filter-btn" data-filter="marketing">Digital Marketing</button>
+                <button class="filter-btn" data-filter="hosting">Hosting & Domain</button>
+                <button class="filter-btn" data-filter="ai">AI & Machine Learning</button>
             </div>
         </section>
         
         <!-- Portfolio Gallery -->
         <section class="portfolio-gallery">
             <div class="gallery-grid">
-                <!-- Project 1 -->
+                <!-- Web Development Projects -->
                 <div class="portfolio-item" data-category="web">
-                    <img src="/api/placeholder/600/400" alt="E-commerce Website" class="portfolio-img">
+                    <img src="../Foto/Portofolio/Megamart-Ecommerce-Template.jpg" alt="E-commerce Website" class="portfolio-img">
                     <div class="portfolio-overlay">
                         <h3 class="portfolio-title">MegaMart E-commerce</h3>
                         <p class="portfolio-category">Pengembangan Web</p>
-                        <p class="portfolio-desc">Platform e-commerce lengkap dengan sistem pembayaran terintegrasi dan dashboard admin yang komprehensif.</p>
+                        <p class="portfolio-desc">Platform e-commerce responsif dengan sistem pembayaran terintegrasi dan dashboard admin yang komprehensif.</p>
                         <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
                     </div>
                 </div>
                 
-                <!-- Project 2 -->
-                <div class="portfolio-item" data-category="mobile">
-                    <img src="/api/placeholder/600/400" alt="Finance App" class="portfolio-img">
+                <!-- Web Development Project 2 -->
+                <div class="portfolio-item" data-category="web">
+                    <img src="/api/placeholder/600/400" alt="Educational Platform" class="portfolio-img">
                     <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">FinTrack - Financial App</h3>
-                        <p class="portfolio-category">Aplikasi Mobile</p>
-                        <p class="portfolio-desc">Aplikasi pelacak keuangan dengan visualisasi data, pengingat tagihan, dan integrasi perbankan.</p>
+                        <h3 class="portfolio-title">EduConnect</h3>
+                        <p class="portfolio-category">Pengembangan Web</p>
+                        <p class="portfolio-desc">Platform edukasi modern dengan fitur video conference, kuis interaktif, dan sistem manajemen konten yang user-friendly.</p>
                         <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
                     </div>
                 </div>
                 
-                <!-- Project 3 -->
+                <!-- Mobile App Projects -->
+                <div class="portfolio-item" data-category="mobile">
+                    <img src="../Foto/Portofolio/btn.jpg" alt="Finance App" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">FinTrack</h3>
+                        <p class="portfolio-category">Aplikasi Mobile</p>
+                        <p class="portfolio-desc">Aplikasi pelacak keuangan untuk Android dan iOS dengan visualisasi data, pengingat tagihan, dan integrasi perbankan.</p>
+                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
+                    </div>
+                </div>
+                
+                <!-- Mobile App Project 2 -->
+                <div class="portfolio-item" data-category="mobile">
+                    <img src="/api/placeholder/600/400" alt="Health App" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">HealthPulse</h3>
+                        <p class="portfolio-category">Aplikasi Mobile</p>
+                        <p class="portfolio-desc">Aplikasi kesehatan cross-platform yang melacak aktivitas fisik, nutrisi, dan menyediakan rencana kesehatan personal.</p>
+                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
+                    </div>
+                </div>
+                
+                <!-- Graphic Design Projects -->
                 <div class="portfolio-item" data-category="design">
-                    <img src="/api/placeholder/600/400" alt="Brand Identity" class="portfolio-img">
+                    <img src="../Foto/Portofolio/ilustrasi-desainer.jpeg" alt="Brand Identity" class="portfolio-img">
                     <div class="portfolio-overlay">
                         <h3 class="portfolio-title">GreenLife Organics</h3>
                         <p class="portfolio-category">Desain Grafis</p>
@@ -480,51 +509,7 @@ session_start();
                     </div>
                 </div>
                 
-                <!-- Project 4 -->
-                <div class="portfolio-item" data-category="branding">
-                    <img src="/api/placeholder/600/400" alt="Hotel Branding" class="portfolio-img">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Luxe Hotel & Resorts</h3>
-                        <p class="portfolio-category">Branding</p>
-                        <p class="portfolio-desc">Rebrand menyeluruh untuk jaringan hotel dengan fokus pada pengalaman mewah dan ramah lingkungan.</p>
-                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
-                    </div>
-                </div>
-                
-                <!-- Project 5 -->
-                <div class="portfolio-item" data-category="marketing">
-                    <img src="/api/placeholder/600/400" alt="Marketing Campaign" class="portfolio-img">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">FreshFit Campaign</h3>
-                        <p class="portfolio-category">Digital Marketing</p>
-                        <p class="portfolio-desc">Kampanye digital multi-platform yang meningkatkan keterlibatan pengguna sebesar 200% dalam 3 bulan.</p>
-                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
-                    </div>
-                </div>
-                
-                <!-- Project 6 -->
-                <div class="portfolio-item" data-category="web">
-                    <img src="/api/placeholder/600/400" alt="Educational Platform" class="portfolio-img">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">EduConnect</h3>
-                        <p class="portfolio-category">Pengembangan Web</p>
-                        <p class="portfolio-desc">Platform edukasi dengan fitur video conference, kuis interaktif, dan sistem manajemen konten yang mudah digunakan.</p>
-                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
-                    </div>
-                </div>
-                
-                <!-- Project 7 -->
-                <div class="portfolio-item" data-category="mobile">
-                    <img src="/api/placeholder/600/400" alt="Health App" class="portfolio-img">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">HealthPulse</h3>
-                        <p class="portfolio-category">Aplikasi Mobile</p>
-                        <p class="portfolio-desc">Aplikasi kesehatan yang melacak aktivitas fisik, nutrisi, dan menyediakan rencana kesehatan personal.</p>
-                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
-                    </div>
-                </div>
-                
-                <!-- Project 8 -->
+                <!-- Graphic Design Project 2 -->
                 <div class="portfolio-item" data-category="design">
                     <img src="/api/placeholder/600/400" alt="Magazine Design" class="portfolio-img">
                     <div class="portfolio-overlay">
@@ -535,13 +520,57 @@ session_start();
                     </div>
                 </div>
                 
-                <!-- Project 9 -->
-                <div class="portfolio-item" data-category="branding">
-                    <img src="/api/placeholder/600/400" alt="Restaurant Branding" class="portfolio-img">
+                <!-- Digital Marketing Projects -->
+                <div class="portfolio-item" data-category="marketing">
+                    <img src="/api/placeholder/600/400" alt="Marketing Campaign" class="portfolio-img">
                     <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Spice Garden Restaurant</h3>
-                        <p class="portfolio-category">Branding</p>
-                        <p class="portfolio-desc">Identitas brand lengkap untuk restoran fusion Asia termasuk logo, menu, dan interior signage.</p>
+                        <h3 class="portfolio-title">FreshFit Campaign</h3>
+                        <p class="portfolio-category">Digital Marketing</p>
+                        <p class="portfolio-desc">Kampanye digital multi-platform dengan strategi SEO dan konten yang meningkatkan keterlibatan pengguna sebesar 200%.</p>
+                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
+                    </div>
+                </div>
+                
+                <!-- Digital Marketing Project 2 -->
+                <div class="portfolio-item" data-category="marketing">
+                    <img src="/api/placeholder/600/400" alt="Social Media Campaign" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">TechVision Ads</h3>
+                        <p class="portfolio-category">Digital Marketing</p>
+                        <p class="portfolio-desc">Kampanye Google & Facebook Ads yang menghasilkan peningkatan konversi 150% dan ROI 3x lipat dalam waktu 2 bulan.</p>
+                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
+                    </div>
+                </div>
+                
+                <!-- Hosting & Domain Projects -->
+                <div class="portfolio-item" data-category="hosting">
+                    <img src="/api/placeholder/600/400" alt="Hosting Solution" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">CloudSecure</h3>
+                        <p class="portfolio-category">Hosting & Domain</p>
+                        <p class="portfolio-desc">Solusi hosting yang aman dan cepat untuk e-commerce skala menengah dengan 99.9% uptime dan backup otomatis.</p>
+                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
+                    </div>
+                </div>
+                
+                <!-- AI & Machine Learning Projects -->
+                <div class="portfolio-item" data-category="ai">
+                    <img src="/api/placeholder/600/400" alt="AI Solution" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">SmartAnalytics</h3>
+                        <p class="portfolio-category">AI & Machine Learning</p>
+                        <p class="portfolio-desc">Implementasi sistem analitik prediktif untuk bisnis retail yang meningkatkan akurasi forecasting inventory hingga 87%.</p>
+                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
+                    </div>
+                </div>
+                
+                <!-- AI & Machine Learning Project 2 -->
+                <div class="portfolio-item" data-category="ai">
+                    <img src="/api/placeholder/600/400" alt="AI Chatbot" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">AssistAI</h3>
+                        <p class="portfolio-category">AI & Machine Learning</p>
+                        <p class="portfolio-desc">Chatbot AI untuk customer service yang mengotomatisasi 70% interaksi pelanggan dengan tingkat kepuasan 92%.</p>
                         <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
                     </div>
                 </div>
@@ -571,19 +600,55 @@ session_start();
                 </div>
             </div>
         </section>
-
-        <!-- Call to Action -->
-        <?php
-        if(!isset($_SESSION["username"])) {
-        echo '<section class="cta-section">
-            <h2 class="section-title">Siap Membuat Proyek Anda Selanjutnya?</h2>
-            <p class="section-subtitle">Jadikan PurpleSite sebagai partner digital Anda untuk hasil yang maksimal dan profesional.</p>
-            <div class="hero-buttons">
-                <a href="../Register Page/Index.html" class="primary-btn" style="background: rgb(48, 16, 80); color: #fff;">Mulai Sekarang</a>
+        
+        <!-- Testimonial Section -->
+        <section class="testimonial-section">
+            <h2 class="testimonial-title">Apa Kata Klien Kami</h2>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <i class='bx bxs-quote-right quote-icon'></i>
+                    <p class="testimonial-text">PurpleSite telah membantu kami mengembangkan website e-commerce kami dengan hasil yang luar biasa. Respons cepat dan perhatian terhadap detail sangat kami apresiasi.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class='bx bxs-user'></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Ahmad Faisal</h4>
+                            <p>CEO, MegaMart</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <i class='bx bxs-quote-right quote-icon'></i>
+                    <p class="testimonial-text">Aplikasi mobile yang dikembangkan oleh tim PurpleSite sangat intuitif dan mendapat respon positif dari pengguna kami. Kerjasama yang menyenangkan!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class='bx bxs-user'></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah Wijaya</h4>
+                            <p>Product Manager, FinTrack</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <i class='bx bxs-quote-right quote-icon'></i>
+                    <p class="testimonial-text">Kampanye digital marketing yang dirancang oleh PurpleSite berhasil meningkatkan traffic website kami hingga 300% dalam 3 bulan. Hasilnya melampaui ekspektasi!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class='bx bxs-user'></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Budi Santoso</h4>
+                            <p>Marketing Director, TechVision</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>';
-        }
-        ?>
+        </section>
         
         <!-- Footer -->
         <footer>
@@ -618,6 +683,7 @@ session_start();
                         <li><a href="#">Aplikasi Mobile</a></li>
                         <li><a href="#">Digital Marketing</a></li>
                         <li><a href="#">Hosting & Domain</a></li>
+                        <li><a href="#">AI & Machine Learning</a></li>
                     </ul>
                 </div>
                 
@@ -737,6 +803,22 @@ session_start();
                 }
             });
         });
+        // User dropdown functionality
+            const userButton = document.getElementById('userButton');
+            const userDropdown = document.getElementById('userDropdown');
+
+            if (userButton) {
+                userButton.addEventListener('click', () => {
+                    userDropdown.classList.toggle('show');
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!userButton.contains(e.target) && !userDropdown.contains(e.target)) {
+                        userDropdown.classList.remove('show');
+                    }
+                });
+            }
     </script>
 </body>
 </html>

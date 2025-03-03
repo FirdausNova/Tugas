@@ -9,12 +9,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validasi password harus ada huruf besar, kecil, angka, minimal 8 karakter
     if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/", $password)) {
-        header("Location: ../index.html?error=password");
+        header("Location: ../Register Page/Index.html?error=password");
         exit();
     }
 
     if ($password !== $confirm_password) {
-        header("Location: ../index.html?error=mismatch");
+        header("Location: ../Register Page/Index.html?error=mismatch");
         exit();
     }
 
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        header("Location: ../index.html?error=exists");
+        header("Location: ../Register Page/Index.html?error=exists");
         exit();
     }
 
@@ -131,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <i class='bx bx-check-circle success-icon'></i>
                 <h1>Registrasi Berhasil!</h1>
                 <p>Selamat <span class="username"><?php echo htmlspecialchars($username); ?></span>, akun Anda telah berhasil dibuat. Anda sekarang dapat login dan mengakses semua fitur kami.</p>
-                <a href="../navbar/Index.html" class="btn">Login Sekarang</a>
+                <a href="../Login page/Index.html" class="btn">Login Sekarang</a>
                 <div class="countdown">
                     Dialihkan ke halaman login dalam <span id="timer">10</span> detik
                 </div>
@@ -147,7 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     
                     if (timeLeft <= 0) {
                         clearInterval(countdown);
-                        window.location.href = '../login.html';
+                        window.location.href = '../Login page/Index.html';
                     }
                 }, 1000);
             </script>
@@ -155,7 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </html>
         <?php
     } else {
-        header("Location: ../index.html?error=failed");
+        header("Location: ../Register Page/Index.html?error=failed");
         exit();
     }
 }

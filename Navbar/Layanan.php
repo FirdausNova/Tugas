@@ -477,6 +477,8 @@ session_start();
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: rgba(255, 255, 255, 0.7);
         }
+
+        
         
         /* Animation classes */
         .animate {
@@ -512,16 +514,22 @@ session_start();
         <div class="auth-buttons">
             <?php
             if(isset($_SESSION["username"])) {
-                // Jika user sudah login - redirect langsung ke dashboard saat klik user button
+                // Jika user sudah login - tampilkan username dengan dropdown logout
                 echo '<div class="user-menu">
-                    <a href="../php/Dashboard.php" class="user-button">
+                    <div class="user-button" id="userButton">
                         <i class="bx bxs-user-circle"></i>
                         <span>' . $_SESSION["username"] . '</span>
                         <i class="bx bx-chevron-down"></i>
-                    </a>
+                    </div>
+                    <div class="dropdown-menu" id="userDropdown">
+                        <a href="../php/logout.php" class="dropdown-item logout">
+                            <i class="bx bx-log-out"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
                 </div>';
             } else {
-                // Jika user belum login - hanya menampilkan tombol Login
+                // Jika user belum login - hanya menampilkan tombol Daftar
                 echo '<a href="../Login Page/Index.html" class="register-btn">Login</a>';
             }
             ?>
@@ -696,63 +704,14 @@ session_start();
             </div>
         </section>
         
-        <!-- Testimonials -->
-        <section class="testimonials-section">
-            <h2 class="section-title">Apa Kata Klien Kami</h2>
-            
-            <div class="testimonials-container">
-                <div class="testimonial-card">
-                    <div class="testimonial-quote"><i class='bx bxs-quote-left'></i></div>
-                    <p class="testimonial-text">PurpleSite membantu perusahaan kami mentransformasi kehadiran online dengan website dan aplikasi yang tidak hanya terlihat profesional tapi juga sangat fungsional. Terima kasih untuk kerja keras dan dedikasi tim!</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="../Foto/man-avatar-50.png" alt="Avatar">
-                        </div>
-                        <div class="author-info">
-                            <h4>Budi Santoso</h4>
-                            <p>CEO, TechNova Indonesia</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-quote"><i class='bx bxs-quote-left'></i></div>
-                    <p class="testimonial-text">Strategi digital marketing yang dirancang oleh PurpleSite berhasil meningkatkan traffic website kami hingga 300% dan konversi meningkat secara signifikan. Sangat merekomendasikan layanan mereka!</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="../Foto/woman-avatar-50.png" alt="Avatar">
-                        </div>
-                        <div class="author-info">
-                            <h4>Siti Rahma</h4>
-                            <p>Marketing Director, Fashion Trend</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-quote"><i class='bx bxs-quote-left'></i></div>
-                    <p class="testimonial-text">Proses pengembangan aplikasi bersama PurpleSite sangat transparan dan profesional. Mereka benar-benar memahami visi kami dan menerjemahkannya menjadi produk yang luar biasa.</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="../Foto/man-avatar-2-50.png" alt="Avatar">
-                        </div>
-                        <div class="author-info">
-                            <h4>Reza Mahendra</h4>
-                            <p>Founder, StartApp</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
         <!-- CTA Section -->
         <section class="cta-section">
             <div class="cta-container">
                 <h2>Siap Memulai Proyek Anda?</h2>
                 <p>Hubungi kami sekarang untuk konsultasi gratis dan diskusikan bagaimana kami dapat membantu mewujudkan visi digital Anda. Tim kami siap memberikan solusi yang sesuai dengan kebutuhan dan anggaran Anda.</p>
                 <div class="cta-buttons">
-                    <a href="#" class="cta-primary">Hubungi Kami</a>
-                    <a href="#" class="cta-secondary">Lihat Portfolio</a>
+                    <a href="Kontak.php" class="cta-primary">Hubungi Kami</a>
+                    <a href="Portofolio.php" class="cta-secondary">Lihat Portfolio</a>
                 </div>
             </div>
         </section>
@@ -810,61 +769,61 @@ session_start();
     </div>
 
     <script>
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        const authButtons = document.querySelector('.auth-buttons');
-        const body = document.querySelector('body');
-        
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            authButtons.classList.toggle('active');
-            hamburger.classList.toggle('active');
-            
-            // Toggle body scroll lock when menu is open
-        // Toggle body scroll lock when menu is open
-    if (navLinks.classList.contains('active')) {
-        body.style.overflow = 'hidden';
-    } else {
-        body.style.overflow = 'auto';
-    }
-});
-
-// Adding animation to elements when scrolled into view
-const animateOnScroll = () => {
-    const elements = document.querySelectorAll('.service-card, .process-step, .testimonial-card, .cta-container');
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const authButtons = document.querySelector('.auth-buttons');
+    const body = document.querySelector('body');
     
-    elements.forEach(element => {
-        const elementPosition = element.getBoundingClientRect().top;
-        const screenPosition = window.innerHeight / 1.2;
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        authButtons.classList.toggle('active');
+        hamburger.classList.toggle('active');
         
-        if (elementPosition < screenPosition) {
-            element.classList.add('animate');
+        // Toggle body scroll lock when menu is open
+        if (navLinks.classList.contains('active')) {
+            body.style.overflow = 'hidden';
+        } else {
+            body.style.overflow = 'auto';
         }
     });
-}
 
-// Run animation check on scroll
-window.addEventListener('scroll', animateOnScroll);
-
-// Initialize animations on page load
-document.addEventListener('DOMContentLoaded', () => {
-    animateOnScroll();
-    
-    // User menu dropdown functionality
-    const userButton = document.querySelector('.user-button');
-    const dropdownMenu = document.querySelector('.dropdown-menu');
-    
-    if (userButton) {
-        userButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            dropdownMenu.classList.toggle('show');
-        });
+    // Adding animation to elements when scrolled into view
+    const animateOnScroll = () => {
+        const elements = document.querySelectorAll('.service-card, .process-step, .testimonial-card, .cta-container');
         
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!userButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
-                dropdownMenu.classList.remove('show');
+        elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.2;
+            
+            if (elementPosition < screenPosition) {
+                element.classList.add('animate');
             }
         });
     }
-});
+
+    // Run animation check on scroll
+    window.addEventListener('scroll', animateOnScroll);
+
+    // Initialize animations and user dropdown on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        animateOnScroll();
+        
+        // User menu dropdown functionality
+        const userButton = document.getElementById('userButton');
+        const userDropdown = document.getElementById('userDropdown');
+        
+        if (userButton) {
+            userButton.addEventListener('click', () => {
+                userDropdown.classList.toggle('show');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!userButton.contains(e.target) && !userDropdown.contains(e.target)) {
+                    userDropdown.classList.remove('show');
+                }
+            });
+        }
+    });
+</script>
+</html>
