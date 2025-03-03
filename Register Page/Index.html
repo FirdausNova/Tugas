@@ -57,9 +57,77 @@
             cursor: pointer;
             font-size: 16px;
         }
+
+    /* Import the page transition styles directly */
+    @keyframes fadeOutDown {
+        from {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    }
+
+    /* Animation for the wrapper */
+    .wrapper {
+        animation: fadeInUp 0.6s ease;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Preloader style */
+    .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(8px);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.5s ease;
+    }
+
+    .preloader.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
     </style>
 </head>
 <body>
+    <div id="preloader" class="preloader">
+        <div class="spinner"></div>
+    </div>
     <div class="wrapper">
         <form action="../php/Register.php" method="post">
             <h1>Daftar</h1>
@@ -87,7 +155,7 @@
             <button type="submit" class="btn">Daftar</button>
         
             <div class="register-link">
-                <p>Sudah Punya Akun? <a href="../Login page/Index.html">Login Sekarang</a></p>
+                <p>Sudah Punya Akun? <a href="../Login page/Index.html" class="page-transition-link">Login Sekarang</a></p>
             </div>
         </form>
     </div>
@@ -187,6 +255,91 @@
                 showAlert(errorMessage, 'error');
             }
         });
+
+        // Add this to both login and register page scripts
+    document.addEventListener('DOMContentLoaded', function() {
+    // Hide preloader after page loads
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        setTimeout(() => {
+            preloader.classList.add('hidden');
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        }, 500);
+    }
+    
+    // Add transition to all links that navigate between login and register
+    const transitionLinks = document.querySelectorAll('.register-link a, .login-link a');
+    
+    transitionLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetUrl = this.getAttribute('href');
+            const wrapper = document.querySelector('.wrapper');
+            
+            // Start exit animation
+            wrapper.style.animation = 'fadeOutDown 0.4s ease forwards';
+            
+            // Create and show preloader
+            if (!preloader) {
+                const newPreloader = document.createElement('div');
+                newPreloader.id = 'preloader';
+                newPreloader.className = 'preloader';
+                newPreloader.innerHTML = '<div class="spinner"></div>';
+                document.body.appendChild(newPreloader);
+            } else {
+                preloader.style.display = 'flex';
+                preloader.classList.remove('hidden');
+            }
+            
+            // Navigate to the new page after animation completes
+            setTimeout(function() {
+                window.location.href = targetUrl;
+            }, 400);
+        });
+    });
+});
+
+        document.addEventListener('DOMContentLoaded', function() {
+        // Hide preloader after page loads
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 500);
+        }
+        
+        // Add transition to all links that navigate between login and register
+        const transitionLinks = document.querySelectorAll('.register-link a');
+        
+        transitionLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetUrl = this.getAttribute('href');
+                const wrapper = document.querySelector('.wrapper');
+                
+                // Start exit animation
+                wrapper.style.animation = 'fadeOutDown 0.4s ease forwards';
+                
+                // Show preloader
+                if (preloader) {
+                    preloader.style.display = 'flex';
+                    preloader.classList.remove('hidden');
+                }
+                
+                // Navigate to the new page after animation completes
+                setTimeout(function() {
+                    window.location.href = targetUrl;
+                }, 400);
+            });
+        });
+    });
     </script>
 </body>
 </html>
