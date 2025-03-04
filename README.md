@@ -17,7 +17,7 @@ Tugas/
 │-- Navbar/
 │-- Register Page/
 │-- css/
-│-- js/
+│-- database/
 │-- php/
 ```
 
