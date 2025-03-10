@@ -541,7 +541,11 @@ session_start();
                     
                     <form id="contactForm" action="process_contact.php" method="POST">
                         <div class="form-group">
+                            <?php if(isset($_SESSION['username'])): ?>
+                            <input type="text" class="form-control" name="name" value="<?php echo htmlspecialchars($_SESSION['username']); ?>" readonly style="background-color: rgba(66, 153, 225, 0.1);">
+                            <?php else: ?>
                             <input type="text" class="form-control" name="name" placeholder="Nama Lengkap" required>
+                            <?php endif; ?>
                         </div>
                         
                         <?php if(!isset($_SESSION['username']) || !isset($_SESSION['email'])): ?>
