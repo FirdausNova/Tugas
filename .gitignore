@@ -1,7 +1,7 @@
 # Environment files
-.env
-.env.backup
-.env.production
+/.env
+/.env.backup
+/.env.production
 
 # Composer dependencies
 /vendor
