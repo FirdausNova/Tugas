@@ -4,7 +4,7 @@ require_once '../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
+
 
 // Load environment variables from .env file
 $env = parse_ini_file('../.env');
@@ -24,10 +24,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail = new PHPMailer(true);
         
         try {
-            // Enable verbose debug output
-            $mail->SMTPDebug = 3; // Debug output
-            ob_start(); // Start output buffering to capture debug info
-            
             // Server settings
             $mail->isSMTP();
             $mail->Host = $env['MAIL_HOST'] ?? 'smtp.gmail.com';
@@ -49,13 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p>Terima kasih,<br>Tim PurpleSite</p>";
             
             $mail->send();
-            $debug_output = ob_get_clean(); // Get debug output
             $success_message = "Email uji coba berhasil dikirim ke $test_email. Silakan periksa kotak masuk Anda.";
         } catch (Exception $e) {
-            $debug_output = ob_get_clean(); // Get debug output even if there's an error
-            
-            // Log the error for debugging
-            error_log("PHPMailer Test Error: " . $e->getMessage());
             
             // Provide detailed error message
             $error_message = "Gagal mengirim email: " . $e->getMessage();

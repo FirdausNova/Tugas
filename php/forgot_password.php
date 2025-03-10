@@ -78,22 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $mail->send();
                     $success_message = "Instruksi reset password telah dikirim ke email Anda.";
                 } catch (Exception $e) {
-                    // Log the error for debugging
-                    error_log("PHPMailer Error in forgot_password.php: " . $e->getMessage());
-                    
-                    // Provide more detailed error message
-                    $error_message = "Gagal mengirim email: " . $e->getMessage();
-                    
-                    // Add specific troubleshooting advice based on common errors
-                    if (strpos($e->getMessage(), 'authenticate') !== false) {
-                        $error_message .= "\nKemungkinan penyebab: Username atau password email tidak valid.";
-                    } elseif (strpos($e->getMessage(), 'connect') !== false) {
-                        $error_message .= "\nKemungkinan penyebab: Masalah koneksi ke server SMTP. Periksa pengaturan host dan port.";
-                    } elseif (strpos($e->getMessage(), 'timed out') !== false) {
-                        $error_message .= "\nKemungkinan penyebab: Koneksi timeout. Periksa koneksi internet Anda.";
-                    } elseif (strpos($e->getMessage(), 'Could not instantiate mail function') !== false) {
-                        $error_message .= "\nKemungkinan penyebab: Fungsi mail PHP tidak tersedia atau tidak dikonfigurasi dengan benar.";
-                    }
+                    $error_message = "Gagal mengirim email. Silakan coba lagi nanti.";
                 }
             } else {
                 $error_message = "Terjadi kesalahan, silakan coba lagi.";

@@ -5,7 +5,6 @@ require_once '../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
 
 // Load environment variables from .env file
 $env = parse_ini_file('../.env');
@@ -13,7 +12,6 @@ $env = parse_ini_file('../.env');
 // Initialize variables
 $error_message = '';
 $success_message = '';
-$debug_output = '';
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -40,10 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail = new PHPMailer(true);
         
         try {
-            // Set debug output to 0 for production use
-            $mail->SMTPDebug = 0; // No debug output in production
-            ob_start(); // Start output buffering to capture debug info
-            
             // Server settings
             $mail->isSMTP();
             $mail->Host = $env['MAIL_HOST'] ?? 'smtp.gmail.com';
@@ -74,16 +68,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ";
             
             $mail->send();
-            $debug_output = ob_get_clean(); // Get debug output
-            
             // Now send confirmation email to the user
             $userMail = new PHPMailer(true);
             
             // Server settings (same as above)
-            // Set debug output to 0 for production use
-            $userMail->SMTPDebug = 0; // No debug output in production
-            ob_start(); // Start output buffering to capture debug info
-            
             $userMail->isSMTP();
             $userMail->Host = $env['MAIL_HOST'] ?? 'smtp.gmail.com';
             $userMail->SMTPAuth = true;
@@ -110,12 +98,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ";
             
             $userMail->send();
-            $user_debug_output = ob_get_clean(); // Get debug output for user email
-            $debug_output .= "\n\n--- User Email Debug Output ---\n" . $user_debug_output;
             $success_message = "Pesan Anda telah berhasil dikirim. Kami telah mengirimkan konfirmasi ke email Anda.";
         } catch (Exception $e) {
-            $debug_output = ob_get_clean(); // Get debug output even if there's an error
-            
             // Log the error for debugging
             error_log("PHPMailer Error: " . $e->getMessage());
             
@@ -137,11 +121,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
-}
-
-// Add debug output to error message if available
-if (!empty($debug_output) && !empty($error_message)) {
-    $error_message .= "\n\n--- Debug Output ---\n" . $debug_output;
 }
 
 // Redirect back to contact page with status
