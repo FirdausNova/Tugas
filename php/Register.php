@@ -1,5 +1,13 @@
 <?php
 include '../php/Koneksi.php';
+require '../vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
+// Load environment variables from .env file
+$env = parse_ini_file('../.env');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = htmlspecialchars($_POST["username"]);
@@ -29,11 +37,65 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../Register Page/Index.html?error=exists");
         exit();
     }
-
-    $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $username, $email, $hashed_password);
+    
+    // Generate verification token
+    $verification_token = bin2hex(random_bytes(32));
+    $verification_expires = date('Y-m-d H:i:s', time() + 24*3600); // 24 hours expiry
+    
+    // Insert user with verification token
+    $stmt = $conn->prepare("INSERT INTO users (username, email, password, email_verified, verification_token, verification_expires) VALUES (?, ?, ?, 0, ?, ?)");
+    $stmt->bind_param("sssss", $username, $email, $hashed_password, $verification_token, $verification_expires);
 
     if ($stmt->execute()) {
+        // Create verification link
+        $verification_link = "http://" . $_SERVER['HTTP_HOST'] . "/Tugas/php/verify_email.php?token=" . $verification_token;
+        
+        // Send verification email with PHPMailer
+        $mail = new PHPMailer(true);
+        
+        try {
+            // Server settings
+            $mail->SMTPDebug = 0; // Set to 2 for verbose debug output
+            $mail->isSMTP();
+            $mail->Host = $env['MAIL_HOST'] ?? 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = $env['MAIL_USERNAME'] ?? 'your-email@gmail.com';
+            $mail->Password = $env['MAIL_PASSWORD'] ?? 'your-app-password';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = $env['MAIL_PORT'] ?? 587;
+            
+            // Recipients
+            $mail->setFrom($env['MAIL_FROM'] ?? 'your-email@gmail.com', $env['MAIL_FROM_NAME'] ?? 'PurpleSite Admin');
+            $mail->addAddress($email);
+            
+            // Content
+            $mail->isHTML(true);
+            $mail->Subject = 'Verifikasi Email PurpleSite';
+            $mail->Body = "<p>Halo {$username},</p>
+                <p>Terima kasih telah mendaftar di PurpleSite.</p>
+                <p>Silakan klik link berikut untuk memverifikasi email Anda:</p>
+                <p><a href='{$verification_link}'>{$verification_link}</a></p>
+                <p>Link ini akan kedaluwarsa dalam 24 jam.</p>
+                <p>Terima kasih,<br>Tim PurpleSite</p>";
+            
+            $mail->send();
+        } catch (Exception $e) {
+            // Log error but continue with registration
+            error_log("Failed to send verification email: {$mail->ErrorInfo}");
+            
+            // Add more detailed error logging for debugging
+            error_log("PHPMailer Error in Register.php: " . $e->getMessage());
+            
+            // Check for common SMTP errors
+            if (strpos($e->getMessage(), 'authenticate') !== false) {
+                error_log("Authentication error: Check MAIL_USERNAME and MAIL_PASSWORD in .env file");
+            } elseif (strpos($e->getMessage(), 'connect') !== false) {
+                error_log("Connection error: Check MAIL_HOST and MAIL_PORT in .env file");
+            } elseif (strpos($e->getMessage(), 'timed out') !== false) {
+                error_log("Timeout error: Check network connection");
+            }
+        }
+        
         ?>
         <!DOCTYPE html>
         <html lang="id">
@@ -130,8 +192,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="success-container">
                 <i class='bx bx-check-circle success-icon'></i>
                 <h1>Registrasi Berhasil!</h1>
-                <p>Selamat <span class="username"><?php echo htmlspecialchars($username); ?></span>, akun Anda telah berhasil dibuat. Anda sekarang dapat login dan mengakses semua fitur kami.</p>
-                <a href="../Login page/Index.html" class="btn">Login Sekarang</a>
+                <p>Selamat <span class="username"><?php echo htmlspecialchars($username); ?></span>, akun Anda telah berhasil dibuat.</p>
+                <p>Silakan periksa email Anda untuk melakukan verifikasi. Anda perlu memverifikasi email sebelum dapat login.</p>
+                <p>Jika Anda tidak menerima email verifikasi, periksa folder spam atau junk Anda.</p>
+                <a href="../Login page/Index.html" class="btn">Ke Halaman Login</a>
                 <div class="countdown">
                     Dialihkan ke halaman login dalam <span id="timer">10</span> detik
                 </div>

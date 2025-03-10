@@ -1,0 +1,7 @@
+{
+    "name": "tugas/password-reset",
+    "description": "Password reset feature using PHPMailer",
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    }
+}

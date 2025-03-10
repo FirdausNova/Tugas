@@ -30,6 +30,7 @@ if (!isset($_SESSION["username"]) && isset($_COOKIE["remember_user"]) && isset($
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
         $_SESSION["username"] = $user["username"];
+        $_SESSION["email"] = $user["email"];
         header("Location: ../Navbar/Navbar.php");
         exit();
     }
@@ -52,26 +53,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
             if (password_verify($password, $user["password"])) {
-                $_SESSION["username"] = $user["username"];
-                
-                // Jika "Ingat Saya" dicentang
-                if ($remember) {
-                    // Generate token unik
-                    $token = bin2hex(random_bytes(32));
+                // Check if email is verified
+                if (isset($user["email_verified"]) && $user["email_verified"] == 0) {
+                    $error_message = "Email belum diverifikasi. Silakan cek email Anda untuk verifikasi.";
+                } else {
+                    $_SESSION["username"] = $user["username"];
+                    $_SESSION["email"] = $user["email"];
                     
-                    // Simpan token ke database
-                    $updateQuery = "UPDATE users SET remember_token = ? WHERE username = ?";
-                    $updateStmt = $conn->prepare($updateQuery);
-                    $updateStmt->bind_param("ss", $token, $username);
-                    $updateStmt->execute();
+                    // Jika "Ingat Saya" dicentang
+                    if ($remember) {
+                        // Generate token unik
+                        $token = bin2hex(random_bytes(32));
+                        
+                        // Simpan token ke database
+                        $updateQuery = "UPDATE users SET remember_token = ? WHERE username = ?";
+                        $updateStmt = $conn->prepare($updateQuery);
+                        $updateStmt->bind_param("ss", $token, $username);
+                        $updateStmt->execute();
+                        
+                        // Set cookie yang bertahan 30 hari
+                        setcookie("remember_user", $username, time() + (86400 * 30), "/");
+                        setcookie("remember_token", $token, time() + (86400 * 30), "/");
+                    }
                     
-                    // Set cookie yang bertahan 30 hari
-                    setcookie("remember_user", $username, time() + (86400 * 30), "/");
-                    setcookie("remember_token", $token, time() + (86400 * 30), "/");
+                    header("Location: ../Navbar/Navbar.php");
+                    exit();
                 }
-                
-                header("Location: ../Navbar/Navbar.php");
-                exit();
             } else {
                 $error_message = "Password salah!";
             }
@@ -196,7 +203,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <div class="remember-forgot">
                     <label><input type="checkbox" name="remember" value="1">Ingat Saya</label>
-                    <a href="#">Lupa Sandi</a>
+                    <a href="../php/forgot_password.php">Lupa Sandi</a>
                 </div>
 
                 <button type="submit" class="btn">Login</button>

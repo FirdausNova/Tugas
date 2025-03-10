@@ -1,0 +1,47 @@
+# Environment files
+.env
+.env.backup
+.env.production
+
+# Composer dependencies
+/vendor
+/composer.lock
+
+# PHPUnit
+.phpunit.result.cache
+
+# IDE and editor files
+/.idea
+/.vscode
+*.sublime-project
+*.sublime-workspace
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Cache and session files
+/storage/*.key
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+
+# Uploaded files (if not tracked)
+/public/uploads/*
+/public/storage
+
+# Node modules (if using npm/yarn)
+/node_modules
+package-lock.json
+yarn.lock
+
+# Build files
+/public/hot
+/public/build
+/dist

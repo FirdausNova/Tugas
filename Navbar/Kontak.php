@@ -528,14 +528,31 @@ session_start();
                 <!-- Contact Form -->
                 <div class="contact-form">
                     <h3>Kirim Pesan</h3>
+                    
+                    <?php if (isset($_GET['status']) && $_GET['status'] == 'success'): ?>
+                    <div class="alert alert-success" style="background-color: rgba(72, 187, 120, 0.2); border-left: 4px solid #48bb78; color: #2f855a; padding: 12px 16px; border-radius: 4px; margin-bottom: 20px;">
+                        <?php echo htmlspecialchars($_GET['message']); ?>
+                    </div>
+                    <?php elseif (isset($_GET['status']) && $_GET['status'] == 'error'): ?>
+                    <div class="alert alert-error" style="background-color: rgba(245, 101, 101, 0.2); border-left: 4px solid #f56565; color: #c53030; padding: 12px 16px; border-radius: 4px; margin-bottom: 20px;">
+                        <?php echo htmlspecialchars($_GET['message']); ?>
+                    </div>
+                    <?php endif; ?>
+                    
                     <form id="contactForm" action="process_contact.php" method="POST">
                         <div class="form-group">
                             <input type="text" class="form-control" name="name" placeholder="Nama Lengkap" required>
                         </div>
                         
+                        <?php if(!isset($_SESSION['username']) || !isset($_SESSION['email'])): ?>
                         <div class="form-group">
                             <input type="email" class="form-control" name="email" placeholder="Email" required>
                         </div>
+                        <?php else: ?>
+                        <div class="form-group" style="background-color: rgba(66, 153, 225, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+                            <p style="margin: 0; color: #4a5568;">Menggunakan email: <strong><?php echo htmlspecialchars($_SESSION['email']); ?></strong></p>
+                        </div>
+                        <?php endif; ?>
                         
                         <div class="form-group">
                             <input type="text" class="form-control" name="subject" placeholder="Subjek" required>
