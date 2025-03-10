@@ -49,39 +49,35 @@ Tugas/
    - Masukkan "PurpleSite" dan klik Generate
    - Gunakan password yang dihasilkan di file `.env` Anda
 
-## Testing Email Functionality
+### **Pengujian Fungsi Email**
 
-1. Access the test page at: `/php/test_email.php`
-2. Enter an email address to send a test email
-3. Check the debug output for any errors
+1. Akses halaman uji: `/php/test_email.php`  
+2. Masukkan alamat email tujuan  
+3. Periksa output debug untuk mendeteksi kesalahan  
 
-## Troubleshooting
+### **Pemecahan Masalah Umum**  
 
-### Common Issues
+1. **PHPMailer Tidak Ditemukan**  
+   - Jalankan `composer install`  
+   - Pastikan folder `vendor` ada  
 
-1. **PHPMailer Not Found**
-   - Run `composer install` to install dependencies
-   - Verify that the vendor directory exists
+2. **Autentikasi Gagal**  
+   - Periksa email & password di file `.env`  
+   - Gunakan App Password untuk Gmail  
+   - Pastikan Verifikasi 2 Langkah diaktifkan  
 
-2. **Authentication Failed**
-   - Check your email and password in the .env file
-   - For Gmail, ensure you're using an App Password, not your regular password
-   - Verify that 2-Step Verification is enabled for your Google account
+3. **Masalah Koneksi**  
+   - Cek konfigurasi `MAIL_HOST` dan `MAIL_PORT`  
+   - Pastikan server mengizinkan koneksi SMTP  
 
-3. **Connection Issues**
-   - Verify MAIL_HOST and MAIL_PORT settings
-   - Check if your server allows outgoing SMTP connections
-   - Try using a different port (465 with SSL instead of 587 with TLS)
+4. **Email Tidak Diterima**  
+   - Periksa folder spam  
+   - Pastikan alamat email tujuan benar  
 
-4. **Email Not Received**
-   - Check spam/junk folders
-   - Verify recipient email address is correct
-   - Check if your email provider is blocking outgoing messages
+### **Formulir Kontak**  
 
-## Contact Form
+Jika pengujian email berhasil tetapi formulir kontak (`/Navbar/Kontak.php`) tidak berfungsi, periksa:  
 
-The contact form in `/Navbar/Kontak.php` uses the same email configuration to send messages. If the test email works but the contact form doesn't, check:
-
-1. Form submission handling in `process_contact.php`
-2. Error messages returned to the contact page
-3. Session variables if using logged-in user's email
+1. Penanganan form di `process_contact.php`  
+2. Pesan kesalahan yang muncul  
+3. Variabel sesi jika menggunakan email pengguna yang masuk
