@@ -754,29 +754,6 @@ session_start();
             });
         });
         
-        // Form Submission
-        const contactForm = document.getElementById('contactForm');
-        
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Form validation can be added here
-            
-            // Simulate form submission
-            const submitBtn = this.querySelector('.submit-btn');
-            const originalText = submitBtn.textContent;
-            
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Mengirim...';
-            
-            // Simulate sending message
-            setTimeout(() => {
-                alert('Pesan Anda telah terkirim! Kami akan menghubungi Anda segera.');
-                contactForm.reset();
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
-            }, 1500);
-        });
         
         // Animation on scroll
         function checkVisible() {
