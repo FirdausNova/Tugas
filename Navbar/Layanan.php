@@ -298,29 +298,25 @@ session_start();
         /* CTA section */
         .cta-section {
             padding: 5rem 10%;
-            background: #fff;
+            background: linear-gradient(to right, rgb(48, 16, 80), rgb(86, 36, 136));
+            color: white;
             text-align: center;
         }
         
-        .cta-container {
+        .cta-content {
             max-width: 800px;
             margin: 0 auto;
-            background: rgba(240, 240, 245, 0.8);
-            padding: 3rem;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
         }
         
-        .cta-container h2 {
-            font-size: 2rem;
-            color: rgb(48, 16, 80);
+        .cta-content h2 {
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
         }
         
-        .cta-container p {
-            color: #555;
-            line-height: 1.7;
+        .cta-content p {
+            font-size: 1.2rem;
             margin-bottom: 2rem;
+            opacity: 0.9;
         }
         
         .cta-buttons {
@@ -330,34 +326,50 @@ session_start();
         }
         
         .cta-primary {
-            background: rgb(48, 16, 80);
-            color: white;
-            padding: 0.8rem 2rem;
+            background: white;
+            color: rgb(48, 16, 80);
+            padding: 1rem 2rem;
             border-radius: 30px;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.3s ease;
         }
         
         .cta-primary:hover {
-            background: rgb(86, 36, 136);
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
         
         .cta-secondary {
             background: transparent;
-            color: rgb(48, 16, 80);
-            padding: 0.8rem 2rem;
+            color: white;
+            padding: 1rem 2rem;
             border-radius: 30px;
             text-decoration: none;
-            font-weight: 500;
-            border: 2px solid rgb(48, 16, 80);
+            font-weight: 600;
+            border: 2px solid white;
             transition: all 0.3s ease;
         }
         
         .cta-secondary:hover {
-            background: rgba(48, 16, 80, 0.1);
+            background: rgba(255, 255, 255, 0.1);
             transform: translateY(-5px);
+        }
+        
+        /* Responsive styles */
+        @media screen and (max-width: 992px) {
+            .service-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-image {
+                margin-bottom: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
         }
         
         /* Responsive styles */
@@ -383,6 +395,9 @@ session_start();
             
             .section-title {
                 font-size: 1.8rem;
+            }
+            .cta-section {
+                padding: 3rem 5%;
             }
         }
 
@@ -576,7 +591,7 @@ session_start();
                             <li><i class='bx bx-check-circle'></i> Optimasi Kecepatan & SEO</li>
                             <li><i class='bx bx-check-circle'></i> Integrasi API & Sistem Lainnya</li>
                         </ul>
-                        <a href="#" class="learn-more">Pelajari Lebih Lanjut <i class='bx bx-right-arrow-alt'></i></a>
+                        <a href="./layanan/PengembanganWeb.php" class="learn-more">Pelajari Lebih Lanjut <i class='bx bx-right-arrow-alt'></i></a>
                     </div>
                 </div>
                 
@@ -593,7 +608,7 @@ session_start();
                             <li><i class='bx bx-check-circle'></i> Desain Media Sosial</li>
                             <li><i class='bx bx-check-circle'></i> Desain Material Promosi</li>
                         </ul>
-                        <a href="#" class="learn-more">Pelajari Lebih Lanjut <i class='bx bx-right-arrow-alt'></i></a>
+                        <a href="./layanan/DesainGrafis.php" class="learn-more">Pelajari Lebih Lanjut <i class='bx bx-right-arrow-alt'></i></a>
                     </div>
                 </div>
                 
@@ -610,7 +625,7 @@ session_start();
                             <li><i class='bx bx-check-circle'></i> Notifikasi Push & Realtime</li>
                             <li><i class='bx bx-check-circle'></i> Maintenance & Support</li>
                         </ul>
-                        <a href="#" class="learn-more">Pelajari Lebih Lanjut <i class='bx bx-right-arrow-alt'></i></a>
+                        <a href="./layanan/AplikasiMobile.php" class="learn-more">Pelajari Lebih Lanjut <i class='bx bx-right-arrow-alt'></i></a>
                     </div>
                 </div>
                 
@@ -627,7 +642,7 @@ session_start();
                             <li><i class='bx bx-check-circle'></i> Google & Facebook Ads</li>
                             <li><i class='bx bx-check-circle'></i> Email Marketing</li>
                         </ul>
-                        <a href="#" class="learn-more">Pelajari Lebih Lanjut <i class='bx bx-right-arrow-alt'></i></a>
+                        <a href="./layanan/DigitalMarketing.php" class="learn-more">Pelajari Lebih Lanjut <i class='bx bx-right-arrow-alt'></i></a>
                     </div>
                 </div>
                 
@@ -644,7 +659,7 @@ session_start();
                             <li><i class='bx bx-check-circle'></i> SSL Certificate & Security</li>
                             <li><i class='bx bx-check-circle'></i> Backup & Restore</li>
                         </ul>
-                        <a href="#" class="learn-more">Pelajari Lebih Lanjut <i class='bx bx-right-arrow-alt'></i></a>
+                        <a href="./layanan/HostingDomain.php" class="learn-more">Pelajari Lebih Lanjut <i class='bx bx-right-arrow-alt'></i></a>
                     </div>
                 </div>
                 
@@ -661,7 +676,7 @@ session_start();
                             <li><i class='bx bx-check-circle'></i> Computer Vision</li>
                             <li><i class='bx bx-check-circle'></i> Natural Language Processing</li>
                         </ul>
-                        <a href="#" class="learn-more">Pelajari Lebih Lanjut <i class='bx bx-right-arrow-alt'></i></a>
+                        <a href="./layanan/AIMachineLearning.php" class="learn-more">Pelajari Lebih Lanjut <i class='bx bx-right-arrow-alt'></i></a>
                     </div>
                 </div>
             </div>
@@ -704,11 +719,11 @@ session_start();
             </div>
         </section>
         
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="cta-container">
+       <!-- CTA Section -->
+       <section class="cta-section">
+            <div class="cta-content">
                 <h2>Siap Memulai Proyek Anda?</h2>
-                <p>Hubungi kami sekarang untuk konsultasi gratis dan diskusikan bagaimana kami dapat membantu mewujudkan visi digital Anda. Tim kami siap memberikan solusi yang sesuai dengan kebutuhan dan anggaran Anda.</p>
+                <p>Hubungi kami sekarang untuk konsultasi gratis dan diskusikan bagaimana kami dapat membantu mewujudkan visi digital Anda.</p>
                 <div class="cta-buttons">
                     <a href="Kontak.php" class="cta-primary">Hubungi Kami</a>
                     <a href="Portofolio.php" class="cta-secondary">Lihat Portfolio</a>

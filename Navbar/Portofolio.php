@@ -456,122 +456,121 @@ session_start();
             <div class="gallery-grid">
                 <!-- Web Development Projects -->
                 <div class="portfolio-item" data-category="web">
-                    <img src="../Foto/Portofolio/Megamart-Ecommerce-Template.jpg" alt="E-commerce Website" class="portfolio-img">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="E-commerce Website" class="portfolio-img">
                     <div class="portfolio-overlay">
                         <h3 class="portfolio-title">MegaMart E-commerce</h3>
                         <p class="portfolio-category">Pengembangan Web</p>
                         <p class="portfolio-desc">Platform e-commerce responsif dengan sistem pembayaran terintegrasi dan dashboard admin yang komprehensif.</p>
-                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
                     </div>
                 </div>
                 
                 <!-- Web Development Project 2 -->
                 <div class="portfolio-item" data-category="web">
-                    <img src="/api/placeholder/600/400" alt="Educational Platform" class="portfolio-img">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Company Website" class="portfolio-img">
                     <div class="portfolio-overlay">
                         <h3 class="portfolio-title">EduConnect</h3>
                         <p class="portfolio-category">Pengembangan Web</p>
-                        <p class="portfolio-desc">Platform edukasi modern dengan fitur video conference, kuis interaktif, dan sistem manajemen konten yang user-friendly.</p>
-                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
+                        <p class="portfolio-desc">Platform pembelajaran online dengan fitur video conference, kuis interaktif, dan sistem manajemen konten pendidikan.</p>
                     </div>
                 </div>
                 
                 <!-- Mobile App Projects -->
                 <div class="portfolio-item" data-category="mobile">
-                    <img src="../Foto/Portofolio/btn.jpg" alt="Finance App" class="portfolio-img">
+                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Finance App" class="portfolio-img">
                     <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">FinTrack</h3>
+                        <h3 class="portfolio-title">BTN Mobile Banking</h3>
                         <p class="portfolio-category">Aplikasi Mobile</p>
-                        <p class="portfolio-desc">Aplikasi pelacak keuangan untuk Android dan iOS dengan visualisasi data, pengingat tagihan, dan integrasi perbankan.</p>
-                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
+                        <p class="portfolio-desc">Aplikasi perbankan mobile dengan fitur transaksi lengkap, notifikasi real-time, dan keamanan tingkat tinggi.</p>
                     </div>
                 </div>
                 
                 <!-- Mobile App Project 2 -->
                 <div class="portfolio-item" data-category="mobile">
-                    <img src="/api/placeholder/600/400" alt="Health App" class="portfolio-img">
+                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Health App" class="portfolio-img">
                     <div class="portfolio-overlay">
                         <h3 class="portfolio-title">HealthPulse</h3>
                         <p class="portfolio-category">Aplikasi Mobile</p>
                         <p class="portfolio-desc">Aplikasi kesehatan cross-platform yang melacak aktivitas fisik, nutrisi, dan menyediakan rencana kesehatan personal.</p>
-                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
                     </div>
                 </div>
                 
                 <!-- Graphic Design Projects -->
                 <div class="portfolio-item" data-category="design">
-                    <img src="../Foto/Portofolio/ilustrasi-desainer.jpeg" alt="Brand Identity" class="portfolio-img">
+                    <img src="https://images.unsplash.com/photo-1572044162444-ad60f128bdea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Brand Identity" class="portfolio-img">
                     <div class="portfolio-overlay">
                         <h3 class="portfolio-title">GreenLife Organics</h3>
                         <p class="portfolio-category">Desain Grafis</p>
                         <p class="portfolio-desc">Identitas visual lengkap termasuk logo, kemasan produk, dan materi pemasaran untuk bisnis produk organik.</p>
-                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
                     </div>
                 </div>
                 
                 <!-- Graphic Design Project 2 -->
                 <div class="portfolio-item" data-category="design">
-                    <img src="/api/placeholder/600/400" alt="Magazine Design" class="portfolio-img">
+                    <img src="https://images.unsplash.com/photo-1594312915251-48db9280c8f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Magazine Design" class="portfolio-img">
                     <div class="portfolio-overlay">
                         <h3 class="portfolio-title">Urban Lifestyle Magazine</h3>
                         <p class="portfolio-category">Desain Grafis</p>
                         <p class="portfolio-desc">Desain editorial untuk majalah gaya hidup urban dengan layout modern dan tipografi yang dinamis.</p>
-                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
                     </div>
                 </div>
                 
                 <!-- Digital Marketing Projects -->
                 <div class="portfolio-item" data-category="marketing">
-                    <img src="/api/placeholder/600/400" alt="Marketing Campaign" class="portfolio-img">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Marketing Campaign" class="portfolio-img">
                     <div class="portfolio-overlay">
                         <h3 class="portfolio-title">FreshFit Campaign</h3>
                         <p class="portfolio-category">Digital Marketing</p>
                         <p class="portfolio-desc">Kampanye digital multi-platform dengan strategi SEO dan konten yang meningkatkan keterlibatan pengguna sebesar 200%.</p>
-                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
                     </div>
                 </div>
                 
                 <!-- Digital Marketing Project 2 -->
                 <div class="portfolio-item" data-category="marketing">
-                    <img src="/api/placeholder/600/400" alt="Social Media Campaign" class="portfolio-img">
+                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Social Media Campaign" class="portfolio-img">
                     <div class="portfolio-overlay">
                         <h3 class="portfolio-title">TechVision Ads</h3>
                         <p class="portfolio-category">Digital Marketing</p>
                         <p class="portfolio-desc">Kampanye Google & Facebook Ads yang menghasilkan peningkatan konversi 150% dan ROI 3x lipat dalam waktu 2 bulan.</p>
-                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
                     </div>
                 </div>
                 
                 <!-- Hosting & Domain Projects -->
                 <div class="portfolio-item" data-category="hosting">
-                    <img src="/api/placeholder/600/400" alt="Hosting Solution" class="portfolio-img">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Hosting Solution" class="portfolio-img">
                     <div class="portfolio-overlay">
                         <h3 class="portfolio-title">CloudSecure</h3>
                         <p class="portfolio-category">Hosting & Domain</p>
                         <p class="portfolio-desc">Solusi hosting yang aman dan cepat untuk e-commerce skala menengah dengan 99.9% uptime dan backup otomatis.</p>
-                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
+                    </div>
+                </div>
+                
+                <!-- Hosting & Domain Project 2 -->
+                <div class="portfolio-item" data-category="hosting">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Domain Services" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">DomainPro</h3>
+                        <p class="portfolio-category">Hosting & Domain</p>
+                        <p class="portfolio-desc">Layanan pendaftaran dan pengelolaan domain dengan berbagai ekstensi populer dan sistem DNS yang handal.</p>
                     </div>
                 </div>
                 
                 <!-- AI & Machine Learning Projects -->
                 <div class="portfolio-item" data-category="ai">
-                    <img src="/api/placeholder/600/400" alt="AI Solution" class="portfolio-img">
+                    <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="AI Solution" class="portfolio-img">
                     <div class="portfolio-overlay">
                         <h3 class="portfolio-title">SmartAnalytics</h3>
                         <p class="portfolio-category">AI & Machine Learning</p>
                         <p class="portfolio-desc">Implementasi sistem analitik prediktif untuk bisnis retail yang meningkatkan akurasi forecasting inventory hingga 87%.</p>
-                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
                     </div>
                 </div>
                 
                 <!-- AI & Machine Learning Project 2 -->
                 <div class="portfolio-item" data-category="ai">
-                    <img src="/api/placeholder/600/400" alt="AI Chatbot" class="portfolio-img">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="AI Chatbot" class="portfolio-img">
                     <div class="portfolio-overlay">
                         <h3 class="portfolio-title">AssistAI</h3>
                         <p class="portfolio-category">AI & Machine Learning</p>
                         <p class="portfolio-desc">Chatbot AI untuk customer service yang mengotomatisasi 70% interaksi pelanggan dengan tingkat kepuasan 92%.</p>
-                        <a href="#" class="portfolio-link">Lihat Detail <i class='bx bx-right-arrow-alt'></i></a>
                     </div>
                 </div>
             </div>
@@ -692,7 +691,7 @@ session_start();
                     <ul>
                         <li><i class='bx bx-map'></i> Jl. Raya Utama No. 123, Jakarta</li>
                         <li><i class='bx bx-phone'></i> +62 812 3456 7890</li>
-                        <li><i class='bx bx-envelope'></i> info@purplesite.com</li>
+                        <li><i class='bx bx-envelope'></i> purplesiteinfo@gmail.com</li>
                     </ul>
                 </div>
             </div>

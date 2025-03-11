@@ -1,5 +1,15 @@
 <?php
 session_start();
+require_once '../php/auth_check.php';
+
+// Check if user is logged in to access contact form
+$login_required = true;
+$show_login_message = false;
+
+// Only show the login message if user is not logged in
+if ($login_required && !isset($_SESSION['username'])) {
+    $show_login_message = true;
+}
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +21,51 @@ session_start();
     <link rel="stylesheet" href="../css/Stylenavbar.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
+        /* Login required message styling */
+        .login-required-message {
+            background-color: rgba(167, 96, 255, 0.1);
+            border-left: 4px solid #a760ff;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .login-required-message i {
+            font-size: 3rem;
+            color: #a760ff;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .login-required-message h3 {
+            color: #301050;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .login-required-message p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .login-required-message .login-btn {
+            display: inline-block;
+            background: #a760ff;
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .login-required-message .login-btn:hover {
+            background: #301050;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
         /* Header styling */
         .page-header {
             height: 40vh;
@@ -502,7 +557,7 @@ session_start();
                         <i class='bx bx-envelope'></i>
                         <div class="info-text">
                             <h4>Email</h4>
-                            <p>info@purplesite.com</p>
+                            <p>purplesiteinfo@gmail.com</p>
                         </div>
                     </div>
                     
@@ -539,24 +594,15 @@ session_start();
                     </div>
                     <?php endif; ?>
                     
+                    <?php if(isset($_SESSION['username'])): ?>
                     <form id="contactForm" action="process_contact.php" method="POST">
                         <div class="form-group">
-                            <?php if(isset($_SESSION['username'])): ?>
                             <input type="text" class="form-control" name="name" value="<?php echo htmlspecialchars($_SESSION['username']); ?>" readonly style="background-color: rgba(66, 153, 225, 0.1);">
-                            <?php else: ?>
-                            <input type="text" class="form-control" name="name" placeholder="Nama Lengkap" required>
-                            <?php endif; ?>
                         </div>
                         
-                        <?php if(!isset($_SESSION['username']) || !isset($_SESSION['email'])): ?>
-                        <div class="form-group">
-                            <input type="email" class="form-control" name="email" placeholder="Email" required>
-                        </div>
-                        <?php else: ?>
                         <div class="form-group" style="background-color: rgba(66, 153, 225, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
                             <p style="margin: 0; color: #4a5568;">Menggunakan email: <strong><?php echo htmlspecialchars($_SESSION['email']); ?></strong></p>
                         </div>
-                        <?php endif; ?>
                         
                         <div class="form-group">
                             <input type="text" class="form-control" name="subject" placeholder="Subjek" required>
@@ -568,6 +614,14 @@ session_start();
                         
                         <button type="submit" class="submit-btn">Kirim Pesan</button>
                     </form>
+                    <?php else: ?>
+                    <div class="login-required-message" style="text-align: center; padding: 30px 20px; background-color: rgba(66, 153, 225, 0.1); border-radius: 8px;">
+                        <i class='bx bx-lock-alt' style="font-size: 3rem; color: rgb(48, 16, 80); margin-bottom: 15px;"></i>
+                        <h3 style="margin-bottom: 10px; color: rgb(48, 16, 80);">Login Diperlukan</h3>
+                        <p style="margin-bottom: 20px; color: #4a5568;">Untuk mengirim pesan kepada kami, Anda perlu login terlebih dahulu.</p>
+                        <a href="../Login Page/Index.html" class="submit-btn" style="display: inline-block; text-decoration: none;">Login Sekarang</a>
+                    </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </section>
@@ -678,7 +732,7 @@ session_start();
                     <ul>
                         <li><i class='bx bx-map'></i> Jl. Raya Utama No. 123, Jakarta</li>
                         <li><i class='bx bx-phone'></i> +62 812 3456 7890</li>
-                        <li><i class='bx bx-envelope'></i> info@purplesite.com</li>
+                        <li><i class='bx bx-envelope'></i> purplesiteinfo@gmail.com</li>
                     </ul>
                 </div>
             </div>
@@ -796,6 +850,42 @@ session_start();
                 }
             });
         }
+    </script>
+
+    <script>
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Function to populate the contact form with package information
+        function populateContactForm() {
+            // Get package parameters from URL
+            const package = getUrlParameter('package');
+            const price = getUrlParameter('price');
+            
+            // If package parameter exists, populate the form
+            if (package) {
+                // Set subject field with package name
+                const subjectField = document.querySelector('input[name="subject"]');
+                if (subjectField) {
+                    subjectField.value = 'Permintaan Informasi Paket ' + package;
+                }
+                
+                // Create template message based on package
+                const messageField = document.querySelector('textarea[name="message"]');
+                if (messageField) {
+                    let templateMessage = `Halo PurpleSite,\n\nSaya tertarik dengan paket hosting ${package} dengan harga Rp ${price.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}. Mohon informasi lebih lanjut mengenai paket ini.\n\nTerima kasih.`;
+                    messageField.value = templateMessage;
+                }
+            }
+        }
+
+        // Run the function when the page loads
+        document.addEventListener('DOMContentLoaded', populateContactForm);
     </script>
 </body>
 </html>

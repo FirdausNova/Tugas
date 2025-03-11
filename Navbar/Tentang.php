@@ -153,6 +153,9 @@ session_start();
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 2.5rem;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .team-card {
@@ -730,7 +733,7 @@ session_start();
                     <ul>
                         <li><i class='bx bx-map'></i> Jl. Raya Utama No. 123, Jakarta</li>
                         <li><i class='bx bx-phone'></i> +62 812 3456 7890</li>
-                        <li><i class='bx bx-envelope'></i> info@purplesite.com</li>
+                        <li><i class='bx bx-envelope'></i> purplesiteinfo@gmail.com</li>
                     </ul>
                 </div>
             </div>

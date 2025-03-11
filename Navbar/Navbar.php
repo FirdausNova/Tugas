@@ -123,23 +123,81 @@ session_start();
             line-height: 1.6;
         }
         
-        /* Call to action section */
-        .cta-section {
+       /* CTA section */
+       .cta-section {
+            padding: 5rem 10%;
             background: linear-gradient(to right, rgb(48, 16, 80), rgb(86, 36, 136));
             color: white;
-            padding: 4rem 10%;
             text-align: center;
         }
         
-        .cta-section h2 {
-            font-size: 2rem;
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-content h2 {
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
         }
         
-        .cta-section p {
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto 2rem auto;
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        .cta-primary {
+            background: white;
+            color: rgb(48, 16, 80);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid white;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        /* Responsive styles */
+        @media screen and (max-width: 992px) {
+            .service-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-image {
+                margin-bottom: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
         }
         
         /* Footer styling */
@@ -282,9 +340,10 @@ session_start();
                             </a>
                         </div>
                     </div>';
-} else {
-    // Jika user belum login - hanya menampilkan tombol Daftar
-    echo '<a href="../Login Page/Index.html" class="register-btn">Login</a>';
+                } 
+            else {
+                // Jika user belum login - hanya menampilkan tombol Daftar
+                echo '<a href="../Login Page/Index.html" class="register-btn">Login</a>';
 }
             ?>
         </div>
@@ -361,13 +420,14 @@ session_start();
         <?php
         if(!isset($_SESSION["username"])) {
         echo'<section class="cta-section" id="kontak">
-            <h2>Siap Untuk Memulai Proyek Anda?</h2>
-            <p>Bergabunglah bersama ribuan klien puas yang telah mempercayakan proyek digital mereka kepada tim profesional kami.</p>
-            <html>
-            <div class="hero-buttons">
-                <a href="../Register Page/Index.html" class="primary-btn">Daftar Sekarang</a>
+            <div class="cta-content">
+                <h2>Siap Untuk Memulai Proyek Anda?</h2>
+                <p>Bergabunglah bersama ribuan klien puas yang telah mempercayakan proyek digital mereka kepada tim profesional kami.</p>
+                <div class="cta-buttons">
+                    <a href="../Register Page/Index.html" class="cta-primary">Daftar Sekarang</a>
+                    <a href="Kontak.php" class="cta-secondary">Hubungi Kami</a>
+                </div>
             </div>
-            </html>
         </section>';
         }
         ?>
@@ -413,7 +473,7 @@ session_start();
                     <ul>
                         <li><i class='bx bx-map'></i> Jl. Raya Utama No. 123, Jakarta</li>
                         <li><i class='bx bx-phone'></i> +62 812 3456 7890</li>
-                        <li><i class='bx bx-envelope'></i> info@purplesite.com</li>
+                        <li><i class='bx bx-envelope'></i> purplesiteinfo@gmail.com</li>
                     </ul>
                 </div>
             </div>

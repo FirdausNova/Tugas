@@ -1,5 +1,9 @@
 <?php
 session_start();
+require_once '../php/auth_check.php';
+
+// Require login to submit contact form
+require_login();
 require_once '../php/Koneksi.php';
 require_once '../vendor/autoload.php';
 

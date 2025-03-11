@@ -12,6 +12,15 @@ if (isset($_GET['logout']) && $_GET['logout'] == 'success') {
     </div>';
 }
 
+// Menangani pesan login required
+$required_message = '';
+if (isset($_GET['required']) && $_GET['required'] == 'true') {
+    $required_message = '<div class="login-required">
+        <i class="bx bx-lock-alt"></i>
+        <p>Anda perlu login untuk mengakses halaman tersebut</p>
+    </div>';
+}
+
 // Pesan error default kosong
 $error_message = '';
 
@@ -76,7 +85,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         setcookie("remember_token", $token, time() + (86400 * 30), "/");
                     }
                     
-                    header("Location: ../Navbar/Navbar.php");
+                    // Redirect ke halaman yang diminta sebelumnya jika ada
+                    if (isset($_SESSION['redirect_url'])) {
+                        $redirect = $_SESSION['redirect_url'];
+                        unset($_SESSION['redirect_url']); // Hapus dari session setelah digunakan
+                        header("Location: $redirect");
+                    } else {
+                        header("Location: ../Navbar/Navbar.php");
+                    }
                     exit();
                 }
             } else {
@@ -97,17 +113,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../Login page/Style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
-        /* Styling untuk notifikasi logout success */
-        .logout-success {
+        /* Styling untuk notifikasi logout success dan login required */
+        .logout-success, .login-required {
             display: flex;
             align-items: center;
             gap: 10px;
-            background-color: rgba(72, 187, 120, 0.2);
-            border-left: 4px solid #48bb78;
             padding: 12px 16px;
             margin-bottom: 20px;
             border-radius: 4px;
+            animation: slideIn 0.5s ease;
+        }
+        
+        .logout-success {
+            background-color: rgba(72, 187, 120, 0.2);
+            border-left: 4px solid #48bb78;
             animation: slideIn 0.5s ease, fadeOut 0.5s ease 5s forwards;
+        }
+        
+        .login-required {
+            background-color: rgba(167, 96, 255, 0.2);
+            border-left: 4px solid #a760ff;
         }
         
         .logout-success i {
@@ -115,8 +140,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: #48bb78;
         }
         
+        .login-required i {
+            font-size: 24px;
+            color: #a760ff;
+        }
+        
         .logout-success p {
             color: #2f855a;
+            font-weight: 500;
+        }
+        
+        .login-required p {
+            color: #6b21a8;
             font-weight: 500;
         }
         
@@ -191,6 +226,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 <!-- Tampilkan pesan sukses logout jika ada -->
                 <?php echo $logout_message; ?>
+                
+                <!-- Tampilkan pesan login required jika ada -->
+                <?php echo $required_message; ?>
                 
                 <div class="input-box">
                     <input type="text" name="username" placeholder="Username Dibutuhkan">
