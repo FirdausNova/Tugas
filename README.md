@@ -4,7 +4,7 @@
 Dokumen ini berisi petunjuk lengkap untuk mengatur dan mengatasi masalah pada fitur email di aplikasi PurpleSite. Panduan ini akan membantu Anda mengonfigurasi sistem email untuk fitur seperti reset password, verifikasi email, dan formulir kontak.
 
 ## ✅ Persyaratan Sistem
-- PHP 7.4 atau lebih inggi
+- PHP 7.4 atau lebih tinggi
 - Composer
 - Library PHPMailer
 - Akses SMTP (Direkomendasikan menggunakan akun Gmail)
